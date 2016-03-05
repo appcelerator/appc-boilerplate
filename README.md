@@ -50,9 +50,10 @@ A collection of Node.js project templates to get you up and running quickly.
 
 Here's a general list of how to use these project templates:
 
-  1. Copy the entire template directory to your workspace directory
-  2. Rename it to your project name
-  3. Edit the `package.json` and update the `name` and git repository name
+  1. Copy the entire template directory somewhere and rename the directory to
+     the name of your project
+  2. Edit the `package.json` and update the `name` and git repository name
+  3. Run `git init`
   4. Run `npm install`
   5. Write your code in the `src` directory
   6. Run `gulp test` or `gulp coverage`
