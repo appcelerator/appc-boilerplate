@@ -25,7 +25,8 @@ export class Example {
 	 * Example method.
 	 *
 	 * @param {String} name - The name to uppercase.
-	 @ @returns {String}
+	 * @returns {String}
+	 * @access public
 	 */
 	toUpper(name) {
 		return name.toUpperCase();
