@@ -78,14 +78,24 @@ gulp.task('lint-test', function () {
  * test tasks
  */
 gulp.task('test', ['lint-src', 'lint-test'], function () {
+	var suite, grep;
+	var p = process.argv.indexOf('--suite');
+	if (p !== -1 && p + 1 < process.argv.length) {
+		suite = process.argv[p + 1];
+	}
+	p = process.argv.indexOf('--grep');
+	if (p !== -1 && p + 1 < process.argv.length) {
+		grep = process.argv[p + 1];
+	}
+
 	return gulp.src(['src/**/*.js', 'test/**/*.js'])
 		.pipe($.plumber())
 		.pipe($.debug({ title: 'build' }))
 		.pipe($.babel())
 		.pipe($.injectModules())
-		.pipe($.filter('test/**/*.js'))
+		.pipe($.filter(suite ? ['test/setup.js', 'test/**/test-' + suite + '.js'] : 'test/**/*.js'))
 		.pipe($.debug({ title: 'test' }))
-		.pipe($.mocha());
+		.pipe($.mocha({ grep: grep }));
 });
 
 gulp.task('coverage', ['lint-src', 'lint-test', 'clean-coverage'], function (cb) {
