@@ -93,7 +93,7 @@ gulp.task('test', ['lint-src', 'lint-test'], function () {
 		.pipe($.debug({ title: 'build' }))
 		.pipe($.babel())
 		.pipe($.injectModules())
-		.pipe($.filter(suite ? ['test/setup.js', 'test/**/test-' + suite + '.js'] : 'test/**/*.js'))
+		.pipe($.filter(suite ? ['test/setup.js'].concat(suite.split(',').map(s => 'test/**/test-' + s + '.js')) : 'test/**/*.js'))
 		.pipe($.debug({ title: 'test' }))
 		.pipe($.mocha({ grep: grep }));
 });
