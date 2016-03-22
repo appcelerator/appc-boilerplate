@@ -25,7 +25,7 @@
     "dist": "gulp dist",
     "coverage": "gulp coverage",
     "docs": "gulp docs",
-    "prepublish": "gulp build",
+    "prepublish": "gulp build && npm shrinkwrap",
     "test": "gulp test"
   },
   "dependencies": {
@@ -58,7 +58,7 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   },
-  "homepage": "https://github.com/appcelerator-modules/MODULE_ID",
+  "homepage": "https://github.com/appcelerator-modules/MODULE_ID#readme",
   "bugs": "https://github.com/appcelerator-modules/MODULE_ID/issues",
   "repository": {
     "type": "git",
