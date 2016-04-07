@@ -16,30 +16,20 @@ const stagingDir = path.join(__dirname, 'staging');
  */
 gulp.task('clean', ['clean-coverage', 'clean-dist', 'clean-docs', 'clean-staging', 'clean-zip']);
 
-gulp.task('clean-coverage', function (done) {
-	del([coverageDir]).then(function () { done(); });
-});
+gulp.task('clean-coverage', done => { del([coverageDir]).then(() => done()) });
 
-gulp.task('clean-dist', function (done) {
-	del([distDir]).then(function () { done(); });
-});
+gulp.task('clean-dist', done => { del([distDir]).then(() => done()) });
 
-gulp.task('clean-docs', function (done) {
-	del([docsDir]).then(function () { done(); });
-});
+gulp.task('clean-docs', done => { del([docsDir]).then(() => done()) });
 
-gulp.task('clean-staging', function (done) {
-	del([stagingDir]).then(function () { done(); });
-});
+gulp.task('clean-staging', done => { del([stagingDir]).then(() => done()) });
 
-gulp.task('clean-zip', function (done) {
-	del(['*.zip']).then(function () { done(); });
-});
+gulp.task('clean-zip', done => { del(['*.zip']).then(() => done()) });
 
 /*
  * build tasks
  */
-gulp.task('build', ['clean-dist', 'lint-src'], function () {
+gulp.task('build', ['clean-dist', 'lint-src'], () => {
 	return gulp
 		.src('src/index.js')
 		.pipe($.plumber())
@@ -54,19 +44,19 @@ gulp.task('build', ['clean-dist', 'lint-src'], function () {
 		.pipe(gulp.dest(distDir));
 });
 
-gulp.task('prep', ['build', 'docs'], function () {
+gulp.task('prep', ['build', 'docs'], () => {
 	// TODO Include documentation!
 	return gulp.src(['dist/' + manifest.name + '.js', 'package.json', 'manifest', 'LICENSE'])
 		.pipe(gulp.dest(path.join(__dirname, 'staging', 'modules', 'commonjs', manifest.name, manifest.version)));
 });
 
-gulp.task('dist', ['prep'], function () {
+gulp.task('dist', ['prep'], () => {
 	return gulp.src('staging/**/*')
 		.pipe($.zip(manifest.name + '-commonjs-' + manifest.version + '.zip'))
 		.pipe(gulp.dest(__dirname));
 });
 
-gulp.task('docs', ['lint-src', 'clean-docs'], function () {
+gulp.task('docs', ['lint-src', 'clean-docs'], () => {
 	return gulp.src('src')
 		.pipe($.plumber())
 		.pipe($.debug({ title: 'docs' }))
@@ -91,20 +81,16 @@ function lint(pattern) {
 		.pipe($.eslint.failAfterError());
 }
 
-gulp.task('lint-src', function () {
-	return lint('src/**/*.js');
-});
+gulp.task('lint-src', () => lint('src/**/*.js'));
 
-gulp.task('lint-test', function () {
-	return lint('test/**/test-*.js');
-});
+gulp.task('lint-test', () => lint('test/**/test-*.js'));
 
 /*
  * test tasks
  */
-gulp.task('test', ['lint-src', 'lint-test'], function () {
-	var suite, grep;
-	var p = process.argv.indexOf('--suite');
+gulp.task('test', ['lint-src', 'lint-test'], () => {
+	let suite, grep;
+	const p = process.argv.indexOf('--suite');
 	if (p !== -1 && p + 1 < process.argv.length) {
 		suite = process.argv[p + 1];
 	}
@@ -123,13 +109,13 @@ gulp.task('test', ['lint-src', 'lint-test'], function () {
 		.pipe($.mocha({ grep: grep }));
 });
 
-gulp.task('coverage', ['lint-src', 'lint-test', 'clean-coverage'], function (cb) {
+gulp.task('coverage', ['lint-src', 'lint-test', 'clean-coverage'], cb => {
 	gulp.src('src/**/*.js')
 		.pipe($.plumber())
 		.pipe($.debug({ title: 'build' }))
 		.pipe($.babelIstanbul())
 		.pipe($.injectModules())
-		.on('finish', function () {
+		.on('finish', () => {
 			gulp.src('test/**/*.js')
 				.pipe($.plumber())
 				.pipe($.debug({ title: 'test' }))
