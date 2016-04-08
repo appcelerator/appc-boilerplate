@@ -89,8 +89,9 @@ gulp.task('lint-test', () => lint('test/**/test-*.js'));
  * test tasks
  */
 gulp.task('test', ['lint-src', 'lint-test'], () => {
-	let suite, grep;
-	const p = process.argv.indexOf('--suite');
+	let suite;
+	let grep;
+	let p = process.argv.indexOf('--suite');
 	if (p !== -1 && p + 1 < process.argv.length) {
 		suite = process.argv[p + 1];
 	}
