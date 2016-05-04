@@ -26,14 +26,13 @@
   },
   "dependencies": {
     "autobind-decorator": "^1.3.3",
-    "babel-polyfill": "^6.7.4",
+    "babel-polyfill": "^6.8.0",
     "source-map-support": "^0.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
-    "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-nodejs-lts": "^2.0.0",
+    "babel-preset-nodejs-lts": "^1.2.2",
     "chai": "^3.5.0",
     "del": "^2.2.0",
     "esdoc-es7-plugin": "^0.0.3",
@@ -49,7 +48,7 @@
     "gulp-mocha": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^2.0.0-alpha",
-    "sinon": "^1.17.3",
+    "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
   },
   "homepage": "https://github.com/appcelerator/REPO_NAME#readme",
