@@ -1,4 +1,4 @@
 {
-	"presets": ["nodejs-lts"],
+	"presets": ["es2015-node4"],
 	"plugins": ["transform-decorators-legacy"]
 }
